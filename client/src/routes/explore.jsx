@@ -35,6 +35,8 @@ const Content = styled.div`
   padding: 10px;
   border-radius: 8px;
 `;
+
+// Emulating a database by using an array (temporary)
 const talents = [
   "Engineer",
   "UI/UX Designer",
