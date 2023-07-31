@@ -3,7 +3,8 @@ import Navbar from "../components/navbar";
 import AnimatedSelect from "../components/select";
 import { SelectValueProvider } from "../components/selectValueContext";
 import { SelectValueContext } from "../components/selectValueContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const Header = styled.header`
   display: flex;
@@ -37,29 +38,31 @@ const Content = styled.div`
 `;
 
 // Emulating a database by using an array (temporary)
-const talents = [
-  "Engineer",
-  "UI/UX Designer",
-  "CEO",
-  "Manager",
-  "Sales Agent",
-  "Customer support Agent",
-  "Developer Relations Manager",
-  "Game Developer",
-];
-const packs = [
-  "Tech Startup Pack",
-  "Creative Agency Pack",
-  "Business Development Pack",
-  "Game Development Studio",
-];
-let selectValues = [
-  { id: "talents", label: "Talents" },
-  { id: "packs", label: "Packs" },
-];
-const talentGrid = talents.map((talent) => <TeamItem>{talent}</TeamItem>);
-const packGrid = packs.map((pack) => <TeamItem>{pack}</TeamItem>);
 const Explore = () => {
+  const [packs, setPacks] = useState([]);
+  const [talents, setTalents] = useState([]);
+
+  let selectValues = [
+    { id: "talents", label: "Talents" },
+    { id: "packs", label: "Packs" },
+  ];
+
+  useEffect(() => {
+    const func = async () => {
+      const talentsResult = await axios.get("http://127.0.0.1:5000/talents");
+      setTalents(talentsResult.data);
+
+      const packsResult = await axios.get("http://127.0.0.1:5000/packs");
+      setPacks(packsResult.data);
+    };
+    func();
+  }, []);
+  const talentGrid = talents.map((talent) => (
+    <TeamItem key={talent}>{talent.description}</TeamItem>
+  ));
+  const packGrid = packs.map((pack) => (
+    <TeamItem key={pack}>{pack.name}</TeamItem>
+  ));
   const { selectedValue, setSelectedValue } = useContext(SelectValueContext);
   return (
     <Wrapper>
@@ -70,7 +73,7 @@ const Explore = () => {
           <AnimatedSelect values={selectValues} />
         </Header>
         <TeamGrid>
-          {selectedValue === "talents" ? talentGrid : packGrid}
+          {selectedValue == "talents" ? talentGrid : packGrid}
         </TeamGrid>
       </Content>
     </Wrapper>
