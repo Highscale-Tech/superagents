@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import IndexPage from "./routes/index";
-import Explore from "./routes/explore";
+import IndexPage from "./pages/index";
+import Explore from "./pages/explore";
 import { SelectValueProvider } from "./components/selectValueContext";
-import Log from "./routes/log";
+import Log from "./pages/log";
 
 const router = createBrowserRouter([
   {
