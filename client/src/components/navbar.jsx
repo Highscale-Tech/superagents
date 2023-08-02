@@ -65,5 +65,6 @@ const Container = styled.div`
   min-height: 80vh;
   font-weight: 700;
   gap: 20px;
+  min-width: 15rem;
 `;
 export default Navbar;

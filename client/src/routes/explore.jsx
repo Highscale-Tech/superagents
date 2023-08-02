@@ -5,6 +5,7 @@ import { SelectValueProvider } from "../components/selectValueContext";
 import { SelectValueContext } from "../components/selectValueContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import Wrapper from "../components/wrapper";
 
 const Header = styled.header`
   display: flex;
@@ -24,12 +25,6 @@ const TeamItem = styled.div`
   justify-content: center;
   align-items: center;
   font-size: larger;
-`;
-const Wrapper = styled.div`
-  padding: 20px;
-  height: 100%;
-  display: flex;
-  gap: 6rem;
 `;
 const Content = styled.div`
   flex-grow: 1;
@@ -58,10 +53,10 @@ const Explore = () => {
     func();
   }, []);
   const talentGrid = talents.map((talent) => (
-    <TeamItem key={talent}>{talent.description}</TeamItem>
+    <TeamItem key={talent}>{talent.type}</TeamItem>
   ));
   const packGrid = packs.map((pack) => (
-    <TeamItem key={pack}>{pack.name}</TeamItem>
+    <TeamItem key={pack}>{pack.type}</TeamItem>
   ));
   const { selectedValue, setSelectedValue } = useContext(SelectValueContext);
   return (
