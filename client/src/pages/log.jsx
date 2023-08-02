@@ -1,5 +1,5 @@
-import { styled } from "styled-components";
 import Navbar from "../components/navbar";
+import styles from "./log.module.css";
 import { useMemo, useState } from "react";
 const logs = [
   {
@@ -41,88 +41,39 @@ const Log = () => {
   );
 
   return (
-    <Wrapper>
+    <div className={styles.wrapper}>
       <Navbar />
-      <Content>
-        <LogList>
+      <div className={styles.content}>
+        <div className={styles.logList}>
           {logs.map((log) => (
-            <LogItem
+            <div
+              className={styles.logItem}
               key={log.id}
               onClick={() => {
                 setSelectedLog(log.id);
               }}
             >
               <strong>{log.agentName}</strong>: {log.message}
-            </LogItem>
+            </div>
           ))}
-        </LogList>
-        <LogDetails>
+        </div>
+        <div className={styles.logDetails}>
           {selectedLog == null && <h1>No Log Selected</h1>}
           {selectedLog !== null && (
             <>
               <h2>{selectedLogData.message}</h2>
               <h1>Details</h1>
               <h3>{selectedLogData.details}</h3>
-              <ButtonWrapper>
-                <Button>Interact!</Button>
-                <Button>Report!</Button>
-              </ButtonWrapper>
+              <div className={styles.buttonWrapper}>
+                <button className={styles.button}>Interact!</button>
+                <button className={styles.button}>Report!</button>
+              </div>
             </>
           )}
-        </LogDetails>
-      </Content>
-    </Wrapper>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default Log;
-const ButtonWrapper = styled.div`
-  display: flex;
-  gap: 20px;
-`;
-const Button = styled.a`
-  background-color: #4d4d4d;
-  color: white;
-  width: 100%;
-  padding: 4px;
-  text-align: center;
-  border-radius: 4px;
-`;
-const Wrapper = styled.div`
-  padding: 20px;
-  height: 100%;
-  display: flex;
-  gap: 6rem;
-`;
-const Content = styled.main`
-  flex-grow: 1;
-  display: flex;
-  gap: 3rem;
-`;
-
-const LogItem = styled.div`
-  border: 3px solid #94a3b8;
-  padding: 8px;
-  border-radius: 8px;
-  background: #f8fafc;
-  &:hover {
-    background: #f1f4f8;
-  }
-`;
-
-const LogList = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const LogDetails = styled.div`
-  width: 100%;
-  background-color: #f8f7ff;
-  border-radius: 8px;
-  padding: 3rem;
-  display: flex;
-  gap: 50px;
-  flex-direction: column;
-`;

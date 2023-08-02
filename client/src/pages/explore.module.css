@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.teamGrid {
+  padding-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+.teamItem {
+  border: 4px #4b4b4b solid;
+  border-radius: 8px;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: larger;
+}
+.content {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.wrapper {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  gap: 6rem;
+}

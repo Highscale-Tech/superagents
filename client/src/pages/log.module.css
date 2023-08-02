@@ -1,0 +1,51 @@
+.buttonWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.button {
+  background-color: #4d4d4d;
+  color: white;
+  width: 100%;
+  padding: 4px;
+  text-align: center;
+  border-radius: 4px;
+}
+.wrapper {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  gap: 6rem;
+}
+.content {
+  flex-grow: 1;
+  display: flex;
+  gap: 3rem;
+}
+
+.logItem {
+  border: 3px solid #94a3b8;
+  padding: 8px;
+  border-radius: 8px;
+  background: #f8fafc;
+  &:hover {
+    background: #f1f4f8;
+  }
+}
+
+.logList {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  width: 100%;
+}
+
+.logDetails {
+  width: 100%;
+  background-color: #f8f7ff;
+  border-radius: 8px;
+  padding: 3rem;
+  display: flex;
+  gap: 50px;
+  flex-direction: column;
+}

@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+}
+.styledLink {
+  background-color: #172554;
+  color: white;
+  width: fit-content;
+  font-weight: 500;
+  padding: 8px 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.styledLink:hover {
+  background: #183174;
+}
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
