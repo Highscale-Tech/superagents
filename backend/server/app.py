@@ -5,29 +5,41 @@ from bson.json_util import dumps
 import json
 
 client = MongoClient("localhost", 27017)
-db = client.superagents
-talentsCol = db.talents
-packsCol = db.packs
 
+db = client.superagents
 app = Flask(__name__)
 
 CORS(app)
 
 
-# Simulating a Database1
-@app.route("/talents")
+@app.route("/allAgents", ["GET"])
 def get_talents():
-    cursor = list(talentsCol.find())
+    cursor = list(db.agents.find())
     data = json.loads(dumps(cursor))
     return jsonify(data)
 
 
-@app.route("/packs")
-def get_packs():
-    cursor = list(packsCol.find())
+@app.route("/allLogs", ["GET"])
+def get_logs():
+    cursor = list(db.logs.find())
     data = json.loads(dumps(cursor))
     return jsonify(data)
 
+
+# Fetch current goals along with their progress
+@app.route("/currentGoals", ["GET"])
+def get_goals():
+    cursor = list(db.goals.find())
+    data = json.loads(dumps(cursor))
+    return jsonify(data)
+
+@app.route("/rethinkStrategy", ["POST"])
+def rethinkStrategy():
+    # send request to service
+
+@app.route("/hireMorePeople", ["POST"])
+def hireMore():
+    # send request to service
 
 if __name__ == "__main__":
     app.run()
