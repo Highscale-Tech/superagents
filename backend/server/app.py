@@ -11,35 +11,99 @@ app = Flask(__name__)
 
 CORS(app)
 
+# Define the collections
+users_collection = db["users"]
+agents_collection = db["agents"]
+goals_collection = db["goals"]
+communication_collection = db["communication"]
 
-@app.route("/allAgents", ["GET"])
-def get_talents():
-    cursor = list(db.agents.find())
-    data = json.loads(dumps(cursor))
-    return jsonify(data)
+# User schema
+user_schema = {
+    "uid": str,
+    "email": str,
+    "isVerified": bool,
+    "firstName": str,
+    "lastName": str,
+    "projectsOwning": [str],  # List of project IDs
+    "projectsMembering": [str],  # List of project IDs
+    "createdAt": str,
+}
 
+# Agents schema
+agent_schema = {
+    "id": str,
+    "name": str,
+    "title": str,
+    "capabilities": [str],  # List of agent capabilities
+}
 
-@app.route("/allLogs", ["GET"])
-def get_logs():
-    cursor = list(db.logs.find())
-    data = json.loads(dumps(cursor))
-    return jsonify(data)
+# Goals schema
+goal_schema = {
+    "id": str,
+    "userOwner": [str],  # List of user IDs
+    "userMember": [str],  # List of user IDs
+    "agents": [str],  # List of agent IDs
+    "createdAt": str,
+    "type": str,  # Ops / Project
+    "category": str,  # marketing / entrepreneurship / holistic
+    "functions": [str],  # List of functions
+    "brief": dict,
+}
 
+# Communication schema
+communication_schema = {
+    "type": str,  # action / message
+    "time": str,
+    "title": str,
+    "content": str,
+}
 
-# Fetch current goals along with their progress
-@app.route("/currentGoals", ["GET"])
-def get_goals():
-    cursor = list(db.goals.find())
-    data = json.loads(dumps(cursor))
-    return jsonify(data)
+# Insert documents
+users_collection.insert_one(
+    {
+        "uid": "user1",
+        "email": "user1@example.com",
+        "isVerified": True,
+        "firstName": "John",
+        "lastName": "Doe",
+        "projectsOwning": [],
+        "projectsMembering": [],
+        "createdAt": "2023-08-04",
+    }
+)
 
-@app.route("/rethinkStrategy", ["POST"])
-def rethinkStrategy():
-    # send request to service
+agents_collection.insert_one(
+    {
+        "id": "agent1",
+        "name": "Agent Smith",
+        "title": "Special Agent",
+        "capabilities": ["Investigation", "Espionage"],
+    }
+)
 
-@app.route("/hireMorePeople", ["POST"])
-def hireMore():
-    # send request to service
+goals_collection.insert_one(
+    {
+        "id": "goal1",
+        "userOwner": ["user1"],
+        "userMember": [],
+        "agents": ["agent1"],
+        "createdAt": "2023-08-04",
+        "type": "Project",
+        "category": "marketing",
+        "functions": ["marketing", "sales"],
+        "brief": {},
+    }
+)
+
+communication_collection.insert_one(
+    {
+        "type": "action",
+        "time": "2023-08-04 12:00:00",
+        "title": "Action Item",
+        "content": "Complete marketing research",
+    }
+)
+
 
 if __name__ == "__main__":
     app.run()
